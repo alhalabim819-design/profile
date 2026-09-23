@@ -265,33 +265,56 @@ nav .container {
 .profile-container {
     position: relative;
     width: 100%;
-    max-width: 440px;
-    aspect-ratio: 4/5;
+    max-width: 420px;
+    aspect-ratio: 9 / 15.8;
     height: auto;
     border-radius: 30px;
-    padding: 2px;
-    background: linear-gradient(45deg, var(--primary-teal), var(--primary-gold));
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    padding: 3px;
+    background: linear-gradient(135deg, var(--primary-gold), var(--primary-teal), var(--primary-gold-light), var(--primary-gold));
+    background-size: 300% 300%;
+    animation: gradientBorder 8s ease infinite;
+    box-shadow: 0 20px 50px rgba(197, 163, 107, 0.22), 0 10px 30px rgba(0, 0, 0, 0.9);
     overflow: hidden;
     transform-style: preserve-3d;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+}
+
+.profile-container:hover {
+    box-shadow: 0 25px 60px rgba(197, 163, 107, 0.38), 0 15px 40px rgba(0, 0, 0, 0.95);
+}
+
+@keyframes gradientBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .profile-img-wrapper {
     width: 100%;
     height: 100%;
-    border-radius: 28px;
+    border-radius: 27px;
     overflow: hidden;
     position: relative;
-    background: #000;
+    background: #050505;
 }
 
-.profile-img-wrapper video {
+.profile-img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.1);
-    filter: brightness(1.1) contrast(1.1);
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+    filter: brightness(1.02) contrast(1.04);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.profile-container:hover .profile-img-wrapper img {
+    transform: scale(1.03);
+    filter: brightness(1.08) contrast(1.08);
 }
 
 .blink-layer {
@@ -623,6 +646,11 @@ footer {
 /* --- Responsive Media Queries --- */
 
 @media (max-width: 992px) {
+    .hero {
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+    }
+
     .hero .container {
         flex-direction: column-reverse;
         text-align: center;
@@ -641,7 +669,9 @@ footer {
     }
 
     .profile-container {
-        max-width: 360px;
+        max-width: 350px;
+        width: 85%;
+        margin: 0 auto;
     }
 }
 
@@ -736,8 +766,13 @@ footer {
     }
 
     .profile-container {
-        max-width: 290px;
+        max-width: 280px;
+        width: 90%;
         border-radius: 22px;
+    }
+
+    .profile-img-wrapper {
+        border-radius: 19px;
     }
 
     .pricing-card {
